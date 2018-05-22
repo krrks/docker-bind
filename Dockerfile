@@ -16,6 +16,9 @@ RUN rm -rf /etc/apt/apt.conf.d/docker-gzip-indexes \
 RUN chgrp -R 0 /usr/sbin/
 RUN chmod -R g+rw /usr/sbin/
 
+RUN chgrp -R 0 /var/
+RUN chmod -R g+rw /var/
+
 
 COPY entrypoint.sh /sbin/entrypoint.sh
 RUN chmod 755 /sbin/entrypoint.sh

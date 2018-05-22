@@ -6,18 +6,14 @@ ENV BIND_USER=bind \
     WEBMIN_VERSION=1.8 \
     DATA_DIR=/data
 
+USER root
+
 RUN rm -rf /etc/apt/apt.conf.d/docker-gzip-indexes \
  && wget http://www.webmin.com/jcameron-key.asc -qO - | apt-key add - \
  && echo "deb http://download.webmin.com/download/repository sarge contrib" >> /etc/apt/sources.list \
  && apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y bind9=${BIND_VERSION}* bind9-host=${BIND_VERSION}* webmin=${WEBMIN_VERSION}* dnsutils \
  && rm -rf /var/lib/apt/lists/*
-
-RUN chgrp -R 0 /usr/sbin/
-RUN chmod -R g+rw /usr/sbin/
-
-RUN chgrp -R 0 /var/
-RUN chmod -R g+rw /var/
 
 
 COPY entrypoint.sh /sbin/entrypoint.sh

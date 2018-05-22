@@ -45,7 +45,7 @@ set_root_passwd() {
 }
 
 create_pid_dir() {
-  mkdir -m 0775 -p /var/run/named
+  mkdir   -p /var/run/named
   chown root:${BIND_USER} /var/run/named
 }
 
